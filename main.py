@@ -1,5 +1,6 @@
 import os
-import iio
+# import iio
+from PIL import Image
 import numpy as np
 
 # if you need to access a file next to the source code, use the variable ROOT
@@ -8,14 +9,16 @@ import numpy as np
 ROOT = os.path.dirname(os.path.realpath(__file__))
 
 def main(input, loss, output):
-    u = iio.read(input)
+    # u = iio.read(input)
+    u = Image.open(input)
     print("hello world", u.shape)
     print(os.listdir('.'))
     print(loss)
 
     v = u + np.random.randn(*u.shape) * 30
 
-    iio.write(output, v)
+    # iio.write(output, v)
+    Image.fromarray(v).save(output)
 
 if __name__ == "__main__":
     import argparse
