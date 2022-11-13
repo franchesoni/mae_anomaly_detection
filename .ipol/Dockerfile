@@ -17,8 +17,8 @@ ENV bin /workdir/bin/
 RUN mkdir -p $bin
 WORKDIR $bin
 # download the model weights
-RUN wget -nc https://dl.fbaipublicfiles.com/mae/visualize/mae_visualize_vit_large.pth
-RUN wget -nc https://dl.fbaipublicfiles.com/mae/visualize/mae_visualize_vit_large_ganloss.pth
+RUN wget -nc https://dl.fbaipublicfiles.com/mae/visualize/mae_visualize_vit_large.pth -O mae_visualize_vit_large.pth
+RUN wget -nc https://dl.fbaipublicfiles.com/mae/visualize/mae_visualize_vit_large_ganloss.pth -O mae_visualize_vit_large_ganloss.pth
 COPY . .
 
 # the execution will happen in the folder /workdir/exec
