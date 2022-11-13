@@ -1,5 +1,4 @@
 import os
-# import iio
 from PIL import Image
 import numpy as np
 
@@ -8,17 +7,19 @@ import numpy as np
 #    torch.load(os.path.join(ROOT, 'weights.pth'))
 ROOT = os.path.dirname(os.path.realpath(__file__))
 
+def minmaxnorm(x):
+    return (x - x.min()) / (x.max() - x.min())
+
 def main(input, loss, output):
-    # u = iio.read(input)
-    u = Image.open(input)
+    u = np.array(Image.open(input))
     print("hello world", u.shape)
     print(os.listdir('.'))
     print(loss)
 
     v = u + np.random.randn(*u.shape) * 30
 
-    # iio.write(output, v)
-    Image.fromarray(v).save(output)
+    out = (minmaxnorm(v)*255).astype(np.uint8)
+    Image.fromarray(out).save(output)
 
 if __name__ == "__main__":
     import argparse
