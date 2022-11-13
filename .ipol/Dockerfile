@@ -1,5 +1,7 @@
 # use one of the images from this repository: https://github.com/centreborelli/ipol-docker-images/
-FROM registry.ipol.im/ipol:v1-py3.9
+# FROM registry.ipol.im/ipol:v1-py3.9
+FROM registry.ipol.im/ipol:v1-py3.9-pytorch
+
 
 # install additional debian packages
 COPY .ipol/packages.txt packages.txt
@@ -8,6 +10,13 @@ RUN apt-get update && apt-get install -y $(cat packages.txt) && rm -rf /var/lib/
 # copy the requirements.txt and install python packages
 COPY requirements.txt requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt && rm requirements.txt
+
+# download the code
+RUN git clone https://github.com/facebookresearch/mae.git
+# download the model weights
+RUN wget -nc https://dl.fbaipublicfiles.com/mae/visualize/mae_visualize_vit_large.pth
+RUN wget -nc https://dl.fbaipublicfiles.com/mae/visualize/mae_visualize_vit_large_ganloss.pth
+
 
 # copy the code to $bin
 ENV bin /workdir/bin/
