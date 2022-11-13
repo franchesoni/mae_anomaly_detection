@@ -109,8 +109,8 @@ def masking_from_mask(self, x, mask):
     # sort noise for each sample
     # npn = 1.*noise+np.arange(noise.shape[1])*0.001
     npn = noise
-    npns, ids_shuffle = torch.sort(npn, dim=1, stable=True)  # ascend: small is keep, large is remove
-    ids_restore = torch.argsort(ids_shuffle, dim=1, stable=True)
+    npns, ids_shuffle = torch.sort(npn, dim=1)  # ascend: small is keep, large is remove
+    ids_restore = torch.argsort(ids_shuffle, dim=1)
 
     # keep the first subset
     ids_keep = ids_shuffle[:, :len_keep]
