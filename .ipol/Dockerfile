@@ -11,17 +11,14 @@ RUN apt-get update && apt-get install -y $(cat packages.txt) && rm -rf /var/lib/
 COPY requirements.txt requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt && rm requirements.txt
 
-# download the code
-RUN git clone https://github.com/facebookresearch/mae.git
-# download the model weights
-RUN wget -nc https://dl.fbaipublicfiles.com/mae/visualize/mae_visualize_vit_large.pth
-RUN wget -nc https://dl.fbaipublicfiles.com/mae/visualize/mae_visualize_vit_large_ganloss.pth
-
 
 # copy the code to $bin
 ENV bin /workdir/bin/
 RUN mkdir -p $bin
 WORKDIR $bin
+# download the model weights
+RUN wget -nc https://dl.fbaipublicfiles.com/mae/visualize/mae_visualize_vit_large.pth
+RUN wget -nc https://dl.fbaipublicfiles.com/mae/visualize/mae_visualize_vit_large_ganloss.pth
 COPY . .
 
 # the execution will happen in the folder /workdir/exec
