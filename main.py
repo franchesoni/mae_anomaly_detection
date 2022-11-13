@@ -15,7 +15,9 @@ def minmaxnorm(x):
     return (x - x.min()) / (x.max() - x.min())
 
 def main(input, loss, output):
-    img = np.array(Image.open(input).resize((224, 224))) / 255.
+    img = Image.open(input)
+    size = img.size
+    img = np.array(img.resize((224, 224))) / 255.
     assert img.shape == (224, 224, 3)
     mask = (np.array(Image.open("mask_0.png").resize((224, 224), Image.NEAREST))[..., -1] > 0).astype(bool)[..., None]
     assert mask.shape == (224, 224, 1)
@@ -39,11 +41,11 @@ def main(input, loss, output):
     print(f'Model loaded in {time.time()-st}s.')
     original, masked, reconstruction, reconstructionplusvisible = run_one_image(img, mask, model_mae)
 
-    Image.fromarray(original).save("original.png")
-    Image.fromarray(masked).save("masked.png")
-    Image.fromarray(reconstruction).save("reconstruction.png")
-    Image.fromarray(reconstructionplusvisible).save("reconstructionplusvisible.png")
-    Image.fromarray(reconstructionplusvisible).save(output)
+    Image.fromarray(original).resize(size).save("original.png")
+    Image.fromarray(masked).resize(size).save("masked.png")
+    Image.fromarray(reconstruction).resize(size).save("reconstruction.png")
+    Image.fromarray(reconstructionplusvisible).resize(size).save("reconstructionplusvisible.png")
+    Image.fromarray(reconstructionplusvisible).resize(size).save(output)
 
 
 if __name__ == "__main__":
