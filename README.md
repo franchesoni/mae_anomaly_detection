@@ -1,7 +1,12 @@
-# template-python
+# Masked Autoencoder demo
 
-This repository can be used as a template for IPOL/MLBriefs demos, especially those using Python.
+This code uses Masked Autoencoder of He et al. for impainting of a given mask. The demo is available on IPOL, where the mask can be drawn over the image. One can try the models (ViT-Large) trained with the MSE loss or with the GAN loss.
 
-In this Readme file, include information about how to run the code outside of IPOL, as well as the licence to the code and a very brief description of what the code does, on which paper it is based, where the official implementation is, etc.
+## To run
+Install packages (PIL, numpy, pytorch, timm) and run:
+```
+python main.py --input 000019.jpg --output output.png --loss GAN
+```
 
-The DDL.json file is shown here for information, there is no need to keep it in your git project.
+## Credit
+Demo based on the official repo https://github.com/facebookresearch/mae which is under the CC-BY-NC 4.0 license. Check the official repo for more details.
