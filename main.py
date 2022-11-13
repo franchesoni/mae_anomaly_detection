@@ -7,10 +7,11 @@ import numpy as np
 #    torch.load(os.path.join(ROOT, 'weights.pth'))
 ROOT = os.path.dirname(os.path.realpath(__file__))
 
-def main(input, output, sigma):
+def main(input, loss, output, sigma):
     u = iio.read(input)
     print("hello world", u.shape)
     print(os.listdir('.'))
+    print(loss)
 
     v = u + np.random.randn(*u.shape) * sigma
 
@@ -20,8 +21,9 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=str, required=True)
+    parser.add_argument("--loss", type=str, required=True)
     parser.add_argument("--sigma", type=float, required=True)
     parser.add_argument("--output", type=str, required=True)
 
     args = parser.parse_args()
-    main(args.input, args.output, args.sigma)
+    main(args.input, args.loss, args.output, args.sigma)
