@@ -30,6 +30,7 @@ def main(input, loss, output):
         model_mae = prepare_model('mae_visualize_vit_large_ganloss.pth', 'mae_vit_large_patch16')
     else:
         print("No model found for loss type " + loss)
+        print(f"Directory contains: {os.listdir()}")
         print("Loading model with random weights")
         model_mae = prepare_model_dummy('mae_vit_large_patch16')
 
