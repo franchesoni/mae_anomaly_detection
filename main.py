@@ -25,10 +25,10 @@ def main(input, loss, output):
 
     st = time.time()
     if loss == "MSE" and os.path.exists("mae_visualize_vit_large.pth"):
-        chkpt_dir = 'mae_visualize_vit_large.pth'
+        chkpt_dir = os.path.join(ROOT, 'mae_visualize_vit_large.pth')
         model_mae = prepare_model(chkpt_dir, 'mae_vit_large_patch16')
     elif loss == "GAN" and os.path.exists("mae_visualize_vit_large_ganloss.pth"):
-        chkpt_dir = 'mae_visualize_vit_large_ganloss.pth'
+        chkpt_dir = os.path.join(ROOT, 'mae_visualize_vit_large_ganloss.pth')
         model_mae = prepare_model('mae_visualize_vit_large_ganloss.pth', 'mae_vit_large_patch16')
     else:
         print("No model found for loss type " + loss)
