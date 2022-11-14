@@ -14,7 +14,7 @@ ROOT = os.path.dirname(os.path.realpath(__file__))
 def minmaxnorm(x):
     return (x - x.min()) / (x.max() - x.min())
 
-def main(input, loss, output):
+def main(input, loss):
     img = Image.open(input)
     size = img.size
     img = np.array(img.resize((224, 224))) / 255.
@@ -45,7 +45,6 @@ def main(input, loss, output):
     Image.fromarray(masked).resize(size).save("masked.png")
     Image.fromarray(reconstruction).resize(size).save("reconstruction.png")
     Image.fromarray(reconstructionplusvisible).resize(size).save("reconstructionplusvisible.png")
-    Image.fromarray(reconstructionplusvisible).resize(size).save(output)
 
 
 if __name__ == "__main__":
@@ -53,7 +52,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=str, required=True)
     parser.add_argument("--loss", type=str, required=True)
-    parser.add_argument("--output", type=str, required=True)
 
     args = parser.parse_args()
-    main(args.input, args.loss, args.output)
+    main(args.input, args.loss)
