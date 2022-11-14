@@ -28,7 +28,7 @@ def main(input, loss, output):
     gan_ckpt = os.path.join(ROOT, "mae_visualize_vit_large_ganloss.pth")
     if loss == "MSE" and os.path.exists(mse_ckpt):
         model_mae = prepare_model(mse_ckpt, 'mae_vit_large_patch16')
-    elif loss == "GAN" and os.path.exists("mae_visualize_vit_large_ganloss.pth"):
+    elif loss == "GAN" and os.path.exists(gan_ckpt):
         model_mae = prepare_model(gan_ckpt, 'mae_vit_large_patch16')
     else:
         print("No model found for loss type " + loss)
