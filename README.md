@@ -1,4 +1,4 @@
-# Masked Autoencoder demo
+# [Masked Autoencoder demo](https://ipolcore.ipol.im/demo/clientApp/demo.html?id=5555531082047)
 
 This code uses Masked Autoencoder of He et al. for impainting a masked region of an image. [The demo is available on IPOL](https://ipolcore.ipol.im/demo/clientApp/demo.html?id=5555531082047), where the mask can be drawn over the image. One can try the models (ViT-Large) trained with the MSE loss or with the GAN loss.
 
