@@ -18,9 +18,9 @@ def main(input, loss):
     img = Image.open(input)
     size = img.size
     img = np.array(img.resize((224, 224))) / 255.
-    assert img.shape == (224, 224, 3)
+    assert img.shape == (224, 224, 3), f"Expected image to be (224, 224, 3) instead of {img.shape}"
     mask = (np.array(Image.open("mask_0.png").resize((224, 224), Image.NEAREST))[..., -1] > 0).astype(bool)[..., None]
-    assert mask.shape == (224, 224, 1)
+    assert mask.shape == (224, 224, 1), f"Expected mask to be (224, 224, 1) instead of {mask.shape}"
     img = imagenet_normalize(img)
 
     st = time.time()
