@@ -15,7 +15,7 @@ def minmaxnorm(x):
     return (x - x.min()) / (x.max() - x.min())
 
 def main(input, loss):
-    img = Image.open(input)
+    img = Image.open(input).convert("RGB")
     size = img.size
     img = np.array(img.resize((224, 224))) / 255.
     assert img.shape == (224, 224, 3), f"Expected image to be (224, 224, 3) instead of {img.shape}"
@@ -45,6 +45,11 @@ def main(input, loss):
     Image.fromarray(masked).resize(size).save("masked.png")
     Image.fromarray(reconstruction).resize(size).save("reconstruction.png")
     Image.fromarray(reconstructionplusvisible).resize(size).save("reconstructionplusvisible.png")
+
+    Image.fromarray(original).save("originalrs.png")
+    Image.fromarray(masked).save("maskedrs.png")
+    Image.fromarray(reconstruction).save("reconstructionrs.png")
+    Image.fromarray(reconstructionplusvisible).save("reconstructionplusvisiblers.png")
 
 
 if __name__ == "__main__":
