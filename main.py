@@ -24,15 +24,15 @@ def main(input, loss, output):
     img = imagenet_normalize(img)
 
     st = time.time()
-    if loss == "MSE" and os.path.exists("mae_visualize_vit_large.pth"):
-        chkpt_dir = os.path.join(ROOT, 'mae_visualize_vit_large.pth')
-        model_mae = prepare_model(chkpt_dir, 'mae_vit_large_patch16')
+    mse_ckpt = os.path.join(ROOT, "mae_visualize_vit_large.pth")
+    gan_ckpt = os.path.join(ROOT, "mae_visualize_vit_large_ganloss.pth")
+    if loss == "MSE" and os.path.exists(mse_ckpt):
+        model_mae = prepare_model(mse_ckpt, 'mae_vit_large_patch16')
     elif loss == "GAN" and os.path.exists("mae_visualize_vit_large_ganloss.pth"):
-        chkpt_dir = os.path.join(ROOT, 'mae_visualize_vit_large_ganloss.pth')
-        model_mae = prepare_model('mae_visualize_vit_large_ganloss.pth', 'mae_vit_large_patch16')
+        model_mae = prepare_model(gan_ckpt, 'mae_vit_large_patch16')
     else:
         print("No model found for loss type " + loss)
-        print(f"Directory contains: {os.listdir()}")
+        print(f"Directory contains: {os.listdir(ROOT)}")
         print("Loading model with random weights")
         model_mae = prepare_model_dummy('mae_vit_large_patch16')
 
