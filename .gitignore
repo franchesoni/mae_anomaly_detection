@@ -241,3 +241,8 @@ fabric.properties
 
 
 .DS_Store
+
+# images
+*.png
+# weights
+*.pth
